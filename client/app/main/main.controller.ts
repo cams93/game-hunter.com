@@ -8,6 +8,54 @@ class MainController {
     this.$http = $http;
     this.awesomeThings = [];
 
+    $scope.sortType     = 'name'; // set the default sort type
+    $scope.sortReverse  = false;  // set the default sort order
+    $scope.searchGame   = '';     // set the default search/filter term
+
+    $scope.games =
+
+      [{
+        "Image": "image",
+        "Name": "Call of Duty: Hardline",
+        "Date": "June, 2015",
+        "Developer": "Visceral Games",
+        "Distributor": "Electronic Arts",
+        "Genres": "First Person Shooter, Action",
+        "Platform": "PC, Play Station 3, PlayStation 4, Xbox One"
+      }, {
+        "Image": "image",
+        "Name": "Assassin's Creed: Syndicate",
+        "Date": "Octuber, 2015",
+        "Developer": "Ubisoft",
+        "Distributor": "Ubisoft",
+        "Genres": "Action, Adventure",
+        "Platform": "PC, Play Station 4, Xbox One"
+      }, {
+        "Image": "image",
+        "Name": "Goat Simulator",
+        "Date": "April, 2014",
+        "Developer": "Coffee Stain Studios",
+        "Distributor": "Koch Media",
+        "Genres": "Action",
+        "Platform": "PC, Linux, OS X, Xbox One, Xbox 360, Play Station 3, Play Station 4"
+      }, {
+        "Image": "image",
+        "Name": "Super Smash Bros 4",
+        "Date": "October, 2014",
+        "Developer": "Sora Ltd, Bandai Namco Games",
+        "Distributor": "Nintendo",
+        "Genres": "Fighting",
+        "Platform": "Nintendo 3DS, Wii U"
+      }, {
+        "Image": "image",
+        "Name": "Rocket League",
+        "Date": "July, 2015",
+        "Developer": "Psyonix",
+        "Distributor": "Psyonix",
+        "Genres": "Sports",
+        "Platform": "PC, OS X, Linux, Play Station 4, Xbox One"
+      }];
+
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
       socket.syncUpdates('thing', this.awesomeThings);

@@ -8,7 +8,7 @@ class MainController {
     this.$http = $http;
     this.awesomeThings = [];
 
-    $scope.sortType     = 'name'; // set the default sort type
+    $scope.sortType     = 'Name'; // set the default sort type
     $scope.sortReverse  = false;  // set the default sort order
     $scope.searchGame   = '';     // set the default search/filter term
 
@@ -17,7 +17,7 @@ class MainController {
       [{
         "Image": "resources/hardline.jpg",
         "Name": "Call of Duty: Hardline",
-        "Date": "June, 2015",
+        "Date": "2015-06-01",
         "Developer": "Visceral Games",
         "Distributor": "Electronic Arts",
         "Genres": "First Person Shooter, Action",
@@ -25,7 +25,7 @@ class MainController {
       }, {
         "Image": "/resources/syndicate.jpg",
         "Name": "Assassin's Creed: Syndicate",
-        "Date": "Octuber, 2015",
+        "Date": "2015-10-01",
         "Developer": "Ubisoft",
         "Distributor": "Ubisoft",
         "Genres": "Action, Adventure",
@@ -33,7 +33,7 @@ class MainController {
       }, {
         "Image": "resources/goat.jpg",
         "Name": "Goat Simulator",
-        "Date": "April, 2014",
+        "Date": "2014-04-01",
         "Developer": "Coffee Stain Studios",
         "Distributor": "Koch Media",
         "Genres": "Action",
@@ -41,7 +41,7 @@ class MainController {
       }, {
         "Image": "/resources/smash.jpg",
         "Name": "Super Smash Bros 4",
-        "Date": "October, 2014",
+        "Date": "2014-10-01",
         "Developer": "Sora Ltd, Bandai Namco Games",
         "Distributor": "Nintendo",
         "Genres": "Fighting",
@@ -49,7 +49,7 @@ class MainController {
       }, {
         "Image": "/resources/rocket.jpg",
         "Name": "Rocket League",
-        "Date": "July, 2015",
+        "Date": "2015-07-01",
         "Developer": "Psyonix",
         "Distributor": "Psyonix",
         "Genres": "Sports",

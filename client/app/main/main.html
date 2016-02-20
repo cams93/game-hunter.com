@@ -36,11 +36,11 @@
 
 
 
-    <!--<div class="alert alert-info">
+    <div class="alert alert-info">
       <p>Sort Type: {{ sortType }}</p>
       <p>Sort Reverse: {{ sortReverse }}</p>
       <p>Search Query: {{ searchGame }}</p>
-    </div>-->
+    </div>
 
     <form>
       <div class="form-group">
@@ -56,52 +56,50 @@
       <thead>
       <tr>
         <td>
-          <a href="#" ng-click="sortType = 'cover'; sortReverse = !sortReverse">
+          <a href="#">
             Cover
-            <span ng-show="sortType == 'cover' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'cover' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Name'; sortReverse = !sortReverse">
             Name
-            <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Name' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Date'; sortReverse = !sortReverse">
             Date
-            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Date' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'developer'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Developer'; sortReverse = !sortReverse">
             Developer
-            <span ng-show="sortType == 'developer' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'developer' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Developer' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Developer' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'distributor'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Distributor'; sortReverse = !sortReverse">
             Distributor
-            <span ng-show="sortType == 'distributor' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'distributor' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Distributor' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Distributor' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'genres'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Genres'; sortReverse = !sortReverse">
             Genres
-            <span ng-show="sortType == 'genres' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'genres' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Genres' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Genres' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'platform'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'Platform'; sortReverse = !sortReverse">
             Platform
-            <span ng-show="sortType == 'platform' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'platform' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'Platform' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Platform' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
       </tr>
@@ -111,7 +109,7 @@
       <tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
         <td> <img ng-src="{{ game.Image }}" width="50"> </td>
         <td>{{ game.Name }}</td>
-        <td>{{ game.Date }}</td>
+        <td>{{ game.Date | date:'MMMM, yyyy'}}</td>
         <td>{{ game.Developer }}</td>
         <td>{{ game.Distributor }}</td>
         <td>{{ game.Genres }}</td>

@@ -15,7 +15,7 @@ class MainController {
     $scope.games =
 
       [{
-        "Image": "image",
+        "Image": "resources/hardline.jpg",
         "Name": "Call of Duty: Hardline",
         "Date": "June, 2015",
         "Developer": "Visceral Games",
@@ -23,7 +23,7 @@ class MainController {
         "Genres": "First Person Shooter, Action",
         "Platform": "PC, Play Station 3, PlayStation 4, Xbox One"
       }, {
-        "Image": "image",
+        "Image": "/resources/syndicate.jpg",
         "Name": "Assassin's Creed: Syndicate",
         "Date": "Octuber, 2015",
         "Developer": "Ubisoft",
@@ -31,7 +31,7 @@ class MainController {
         "Genres": "Action, Adventure",
         "Platform": "PC, Play Station 4, Xbox One"
       }, {
-        "Image": "image",
+        "Image": "resources/goat.jpg",
         "Name": "Goat Simulator",
         "Date": "April, 2014",
         "Developer": "Coffee Stain Studios",
@@ -39,7 +39,7 @@ class MainController {
         "Genres": "Action",
         "Platform": "PC, Linux, OS X, Xbox One, Xbox 360, Play Station 3, Play Station 4"
       }, {
-        "Image": "image",
+        "Image": "/resources/smash.jpg",
         "Name": "Super Smash Bros 4",
         "Date": "October, 2014",
         "Developer": "Sora Ltd, Bandai Namco Games",
@@ -47,7 +47,7 @@ class MainController {
         "Genres": "Fighting",
         "Platform": "Nintendo 3DS, Wii U"
       }, {
-        "Image": "image",
+        "Image": "/resources/rocket.jpg",
         "Name": "Rocket League",
         "Date": "July, 2015",
         "Developer": "Psyonix",

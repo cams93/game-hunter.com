@@ -12,37 +12,11 @@ class MainController {
     $scope.sortReverse  = false;  // set the default sort order
     $scope.searchGame   = '';     // set the default search/filter term
 
-    $scope.genres = [
-      {"genre": "Action"},
-      {"genre": "Shooter"},
-      {"genre": "Action-adventure"},
-      {"genre": "Adventure"},
-      {"genre": "Role-playing"},
-      {"genre": "Simulation"},
-      {"genre": "Sports"},
-      {"genre": "Strategy"},
-      {"genre": "Survival horror"},
-      {"genre": "Massively multiplayer online"}
-    ];
-
-    $scope.developers = [
-      {"developer": "Visceral Games"},
-      {"developer": "Ubisoft"},
-      {"developer": "Coffee Stain Studios"},
-      {"developer": "Sora Ltd, Bandai Namco Games"},
-      {"developer": "Psyonix"},
-    ];
-
-    $scope.distributors = [
-      {"distributor": "Electronic Arts"},
-      {"distributor": "Ubisoft"},
-      {"distributor": "Koch Media"},
-      {"distributor": "Nintendo"},
-      {"distributor": "Psyonix"}
-    ];
+    $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
+    $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
+    $scope.distributors = ["Electronic Arts", "Ubisoft", "Koch Media", "Nintendo", "Psyonix"];
 
     $scope.games =
-
       [{
         "Image": "resources/hardline.jpg",
         "Name": "Call of Duty: Hardline",

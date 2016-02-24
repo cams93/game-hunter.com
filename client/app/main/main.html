@@ -34,12 +34,9 @@
 </div>-->
 
 <div class="row">
-
-  <div class="col-md-1"></div>
-  <div class="col-md-2">
+  <div class="col-md-2 col-md-offset-1">
     <div class="panel panel-default">
       <table class="table table-bordered">
-
         <thead>
         <tr>
           <td>
@@ -53,7 +50,7 @@
         <tr ng-repeat="genres in genres">
           <td>
             <input type="checkbox" value="">
-            {{ genres.genre }}
+            {{ genres }}
           </td>
         </tr>
         </tbody>
@@ -70,7 +67,7 @@
         <tr ng-repeat="developers in developers">
           <td>
             <input type="checkbox" value="">
-            {{ developers.developer }}
+            {{ developers }}
           </td>
         </tr>
         </tbody>
@@ -87,18 +84,15 @@
         <tr ng-repeat="distributors in distributors">
           <td>
             <input type="checkbox" value="">
-            {{ distributors.distributor }}
+            {{ distributors }}
           </td>
         </tr>
         </tbody>
-
       </table>
     </div>
-
   </div>
 
   <div class="col-md-8">
-
     <form>
       <div class="form-group">
         <div class="input-group">
@@ -109,7 +103,6 @@
     </form>
 
     <table class="table table-bordered table-striped">
-
       <thead>
       <tr>
         <td>
@@ -157,7 +150,6 @@
         </td>
       </tr>
       </thead>
-
       <tbody>
       <tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
         <td> <img ng-src="{{ game.Image }}" width="50"> </td>
@@ -169,14 +161,8 @@
         <td>{{ game.Platform }}</td>
       </tr>
       </tbody>
-
     </table>
   </div>
-
-  <div class="col-md-1"></div>
-
 </div>
-
-
 
 <footer></footer>

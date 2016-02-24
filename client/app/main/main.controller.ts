@@ -12,6 +12,35 @@ class MainController {
     $scope.sortReverse  = false;  // set the default sort order
     $scope.searchGame   = '';     // set the default search/filter term
 
+    $scope.genres = [
+      {"genre": "Action"},
+      {"genre": "Shooter"},
+      {"genre": "Action-adventure"},
+      {"genre": "Adventure"},
+      {"genre": "Role-playing"},
+      {"genre": "Simulation"},
+      {"genre": "Sports"},
+      {"genre": "Strategy"},
+      {"genre": "Survival horror"},
+      {"genre": "Massively multiplayer online"}
+    ];
+
+    $scope.developers = [
+      {"developer": "Visceral Games"},
+      {"developer": "Ubisoft"},
+      {"developer": "Coffee Stain Studios"},
+      {"developer": "Sora Ltd, Bandai Namco Games"},
+      {"developer": "Psyonix"},
+    ];
+
+    $scope.distributors = [
+      {"distributor": "Electronic Arts"},
+      {"distributor": "Ubisoft"},
+      {"distributor": "Koch Media"},
+      {"distributor": "Nintendo"},
+      {"distributor": "Psyonix"}
+    ];
+
     $scope.games =
 
       [{

@@ -34,14 +34,6 @@
   <div class="col-md-3"></div>
   <div class="col-md-8">
 
-
-
-    <div class="alert alert-info">
-      <p>Sort Type: {{ sortType }}</p>
-      <p>Sort Reverse: {{ sortReverse }}</p>
-      <p>Search Query: {{ searchGame }}</p>
-    </div>
-
     <form>
       <div class="form-group">
         <div class="input-group">
@@ -89,17 +81,13 @@
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'Genres'; sortReverse = !sortReverse">
+          <a href="#">
             Genres
-            <span ng-show="sortType == 'Genres' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'Genres' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'Platform'; sortReverse = !sortReverse">
+          <a href="#">
             Platform
-            <span ng-show="sortType == 'Platform' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'Platform' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
       </tr>

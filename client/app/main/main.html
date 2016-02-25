@@ -1,6 +1,10 @@
+<head>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
 <navbar></navbar>
 
-<header class="hero-unit" id="banner">
+<!--<header class="hero-unit" id="banner">
   <div class="container">
     <h1>Hola!</h1>
     <p class="lead">Kick-start your next web app with Angular Fullstack</p>
@@ -27,6 +31,138 @@
       </span>
     </p>
   </form>
+</div>-->
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-1">
+    <div class="panel panel-default">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <td>
+              <a href="#" data-toggle="collapse" data-target="#genres">
+                Genres
+              </a>
+          </td>
+        </tr>
+        </thead>
+        <tbody id="genres" class="collapse in">
+        <tr ng-repeat="genres in genres">
+          <td>
+            <input type="checkbox" value="">
+            {{ genres }}
+          </td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr>
+          <td>
+            <a href="#" data-toggle="collapse" data-target="#developer">
+              Developer
+            </a>
+          </td>
+        </tr>
+        </thead>
+        <tbody id="developer" class="collapse">
+        <tr ng-repeat="developers in developers">
+          <td>
+            <input type="checkbox" value="">
+            {{ developers }}
+          </td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr>
+          <td>
+            <a href="#" data-toggle="collapse" data-target="#distributor">
+              Distributor
+            </a>
+          </td>
+        </tr>
+        </thead>
+        <tbody id="distributor" class="collapse">
+        <tr ng-repeat="distributors in distributors">
+          <td>
+            <input type="checkbox" value="">
+            {{ distributors }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-search"></i></div>
+          <input type="text" class="form-control" placeholder="Search game" ng-model="searchGame.Name">
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <td>
+          <a>
+            Cover
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'Name'; sortReverse = !sortReverse">
+            Name
+            <span ng-show="sortType == 'Name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Name' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'Date'; sortReverse = !sortReverse">
+            Date
+            <span ng-show="sortType == 'Date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Date' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'Developer'; sortReverse = !sortReverse">
+            Developer
+            <span ng-show="sortType == 'Developer' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Developer' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'Distributor'; sortReverse = !sortReverse">
+            Distributor
+            <span ng-show="sortType == 'Distributor' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'Distributor' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a>
+            Genres
+          </a>
+        </td>
+        <td>
+          <a>
+            Platform
+          </a>
+        </td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
+        <td> <img ng-src="{{ game.Image }}" width="50"> </td>
+        <td>{{ game.Name }}</td>
+        <td>{{ game.Date | date:'MMMM, yyyy'}}</td>
+        <td>{{ game.Developer }}</td>
+        <td>{{ game.Distributor }}</td>
+        <td>{{ game.Genres }}</td>
+        <td>{{ game.Platform }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <footer></footer>

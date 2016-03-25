@@ -7,7 +7,10 @@
 
 module.exports = {
   DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'gamehuntercom-secret',
+  SESSION_SECRET:   'gamehunter-secret',
+
+  FACEBOOK_ID:      '918288498288782',
+  FACEBOOK_SECRET:  'bb0a508ee691a546f2d16e8fca572201',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''

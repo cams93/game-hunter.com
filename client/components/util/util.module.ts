@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('gameHunterComApp.util', []);
+angular.module('gameHunterApp.util', []);

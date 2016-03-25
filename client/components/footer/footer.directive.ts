@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('gameHunterComApp')
-  .directive('footer', function () {
+angular.module('gameHunterApp')
+  .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',
       restrict: 'E',

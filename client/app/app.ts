@@ -1,13 +1,16 @@
 'use strict';
 
-angular.module('gameHunterComApp', [
-  'gameHunterComApp.constants',
+angular.module('gameHunterApp', [
+  'gameHunterApp.auth',
+  'gameHunterApp.admin',
+  'gameHunterApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'validation.match'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider

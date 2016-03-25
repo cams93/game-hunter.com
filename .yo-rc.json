@@ -1,6 +1,6 @@
 {
   "generator-angular-fullstack": {
-    "generatorVersion": "3.3.0-beta.0",
+    "generatorVersion": "3.5.0",
     "endpointDirectory": "server/api/",
     "insertRoutes": true,
     "registerRoutesFile": "server/routes.js",
@@ -22,11 +22,13 @@
       "bootstrap": true,
       "uibootstrap": true,
       "socketio": true,
+      "auth": true,
       "models": true,
       "mongooseModels": true,
       "mongoose": true,
+      "oauth": true,
+      "facebookAuth": true,
       "grunt": true,
-      "gulp": false,
       "jasmine": true,
       "mocha": false,
       "should": false,
@@ -36,14 +38,17 @@
   "generator-ng-component": {
     "routeDirectory": "client/app/",
     "directiveDirectory": "client/app/",
+    "componentDirectory": "app/components/",
     "filterDirectory": "client/app/",
     "serviceDirectory": "client/app/",
     "basePath": "client",
     "moduleName": "",
+    "modulePrompt": true,
     "filters": [
       "ngroute",
       "jasmine",
-      "ngroute"
+      "ngroute",
+      "es6"
     ],
     "extensions": [
       "ts",
@@ -57,6 +62,7 @@
     "serviceTemplates": "",
     "factoryTemplates": "",
     "controllerTemplates": "",
+    "componentTemplates": "",
     "decoratorTemplates": "",
     "providerTemplates": "",
     "routeTemplates": ""

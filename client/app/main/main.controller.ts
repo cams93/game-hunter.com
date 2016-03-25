@@ -6,6 +6,7 @@ class MainController {
 
   constructor($http, $scope, socket) {
     this.$http = $http;
+    this.socket = socket;
     this.awesomeThings = [];
 
     $scope.sortType     = 'Name'; // set the default sort type
@@ -18,7 +19,7 @@ class MainController {
 
     $scope.games =
       [{
-        "Image": "resources/hardline.jpg",
+        "Image": "assets/images/hardline.jpg",
         "Name": "Call of Duty: Hardline",
         "Date": "2015-06-01",
         "Developer": "Visceral Games",
@@ -26,7 +27,7 @@ class MainController {
         "Genres": "First Person Shooter, Action",
         "Platform": "PC, Play Station 3, PlayStation 4, Xbox One"
       }, {
-        "Image": "/resources/syndicate.jpg",
+        "Image": "assets/images/syndicate.jpg",
         "Name": "Assassin's Creed: Syndicate",
         "Date": "2015-10-01",
         "Developer": "Ubisoft",
@@ -34,7 +35,7 @@ class MainController {
         "Genres": "Action, Adventure",
         "Platform": "PC, Play Station 4, Xbox One"
       }, {
-        "Image": "resources/goat.jpg",
+        "Image": "assets/images/goat.jpg",
         "Name": "Goat Simulator",
         "Date": "2014-04-01",
         "Developer": "Coffee Stain Studios",
@@ -42,7 +43,7 @@ class MainController {
         "Genres": "Action",
         "Platform": "PC, Linux, OS X, Xbox One, Xbox 360, Play Station 3, Play Station 4"
       }, {
-        "Image": "/resources/smash.jpg",
+        "Image": "assets/images/smash.jpg",
         "Name": "Super Smash Bros 4",
         "Date": "2014-10-01",
         "Developer": "Sora Ltd, Bandai Namco Games",
@@ -50,7 +51,7 @@ class MainController {
         "Genres": "Fighting",
         "Platform": "Nintendo 3DS, Wii U"
       }, {
-        "Image": "/resources/rocket.jpg",
+        "Image": "assets/images/rocket.jpg",
         "Name": "Rocket League",
         "Date": "2015-07-01",
         "Developer": "Psyonix",
@@ -81,7 +82,10 @@ class MainController {
   }
 }
 
-angular.module('gameHunterComApp')
-  .controller('MainController', MainController);
+angular.module('gameHunterApp')
+  .component('main', {
+    templateUrl: 'app/main/main.html',
+    controller: MainController
+  });
 
 })();

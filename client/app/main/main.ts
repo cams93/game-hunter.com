@@ -1,11 +1,9 @@
 'use strict';
 
-angular.module('gameHunterComApp')
+angular.module('gameHunterApp')
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        template: '<main></main>'
       });
   });

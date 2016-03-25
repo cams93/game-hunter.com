@@ -1,29 +1,37 @@
 'use strict';
 
-describe('Controller: MainController', function() {
+describe('Component: mainComponent', function() {
 
   // load the controller's module
-  beforeEach(module('gameHunterComApp'));
+  beforeEach(module('gameHunterApp'));
   beforeEach(module('socketMock'));
 
   var scope;
-  var MainController;
+  var mainComponent;
   var $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
-    $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+  beforeEach(inject(function(
+    _$httpBackend_,
+    $http,
+    $componentController,
+    $rootScope,
+    socket) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('/api/things')
+        .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
-    scope = $rootScope.$new();
-    MainController = $controller('MainController', {
-      $scope: scope
-    });
+      scope = $rootScope.$new();
+      mainComponent = $componentController('main', {
+        $http: $http,
+        $scope: scope,
+        socket: socket
+      });
   }));
 
   it('should attach a list of things to the controller', function() {
+    mainComponent.$onInit();
     $httpBackend.flush();
-    expect(MainController.awesomeThings.length).toBe(4);
+    expect(mainComponent.awesomeThings.length).toBe(4);
   });
 });

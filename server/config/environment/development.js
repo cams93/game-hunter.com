@@ -6,7 +6,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/gamehuntercom-dev'
+    uri: 'mongodb://localhost/gamehunter-dev'
   },
 
   // Seed database on startup

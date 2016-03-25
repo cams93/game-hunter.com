@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gameHunterComApp')
+angular.module('gameHunterApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',

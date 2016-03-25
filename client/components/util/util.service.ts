@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('gameHunterComApp.util')
+angular.module('gameHunterApp.util')
   .factory('Util', UtilService);
 
 })();

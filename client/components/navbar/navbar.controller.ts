@@ -10,14 +10,17 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
-  constructor($location) {
+  constructor($location, Auth) {
     this.$location = $location;
-    }
+    this.isLoggedIn = Auth.isLoggedIn;
+    this.isAdmin = Auth.isAdmin;
+    this.getCurrentUser = Auth.getCurrentUser;
+  }
 
   isActive(route) {
     return route === this.$location.path();
   }
 }
 
-angular.module('gameHunterComApp')
+angular.module('gameHunterApp')
   .controller('NavbarController', NavbarController);

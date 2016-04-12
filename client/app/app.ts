@@ -10,9 +10,11 @@ angular.module('gameHunterApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'ngResource'
 ])
-  .config(function($routeProvider, $locationProvider) {
+
+.config(function($routeProvider, $locationProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'

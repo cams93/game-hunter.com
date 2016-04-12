@@ -4,7 +4,7 @@
 
 class MainController {
 
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $resource, $giantbomb) {
     this.$http = $http;
     this.socket = socket;
     this.awesomeThings = [];
@@ -13,11 +13,21 @@ class MainController {
     $scope.sortReverse  = false;  // set the default sort order
     $scope.searchGame   = '';     // set the default search/filter term
 
+
+    $scope.query = [];
+    var callback = function(result){
+      $scope.query = result.results;
+      console.log($scope.query);
+      return result;
+    };
+
+    $giantbomb.gameSearch("gears of war",callback);
+
     $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
     $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
     $scope.distributors = ["Electronic Arts", "Ubisoft", "Koch Media", "Nintendo", "Psyonix"];
 
-    $scope.games =
+    /*$scope.games =
       [{
         "Image": "assets/images/hardline.jpg",
         "Name": "Call of Duty: Hardline",
@@ -58,7 +68,7 @@ class MainController {
         "Distributor": "Psyonix",
         "Genres": "Sports",
         "Platform": "PC, OS X, Linux, Play Station 4, Xbox One"
-      }];
+      }];*/
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
@@ -83,9 +93,64 @@ class MainController {
 }
 
 angular.module('gameHunterApp')
+  .factory('$giantbomb', ['$resource', function($resource) {
+    var GiantBomb = {
+
+      _apiKey : 'c73ada009a6a9bd847ff325e3344c3dde52ed181',
+
+      setAPIKey : function(apiKey){
+        console.log("Setting Api Key", apiKey);
+        this._apiKey = apiKey;
+      },
+
+      gameDetails : function(gameId, callback){
+        $resource('http://www.giantbomb.com/:action/:id',
+          {
+            action: 'api/game',
+            id: gameId,
+            field_list: 'name,description,id,original_release_date,platforms,api_detail_url,site_detail_url',
+            api_key: this._apiKey,
+            format: 'jsonp',
+            json_callback: 'JSON_CALLBACK'
+          },
+          {
+            get: {method: 'JSONP'}
+          }).get({}, function(result){
+          callback(result);
+        });
+      },
+
+      gameSearch : function(searchString, callback){
+        $resource('http://www.giantbomb.com/:action',
+          {
+            action: 'api/games',
+            field_list: 'genres,name,image,site_detail_url,id,platforms,original_release_date',
+            filter: 'name:' + searchString,
+            api_key: this._apiKey,
+            format: 'jsonp',
+            json_callback: 'JSON_CALLBACK'
+          },
+          {
+            get: {method: 'JSONP'}
+          }).get({}, function(result){
+          callback(result);
+        });
+      }
+    };
+    return GiantBomb;
+  }])
+  .filter('split', function() {
+    return function(input, splitChar, splitIndex) {
+      // do some bounds checking here to ensure it has that index
+      return input.split(splitChar)[splitIndex];
+    }
+  })
   .component('main', {
     templateUrl: 'app/main/main.html',
     controller: MainController
   });
 
 })();
+
+
+

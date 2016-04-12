@@ -151,7 +151,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
+        <!--<tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
           <td> <img ng-src="{{ game.Image }}" width="50"> </td>
           <td>{{ game.Name }}</td>
           <td>{{ game.Date | date:'MMMM, yyyy'}}</td>
@@ -159,6 +159,15 @@
           <td>{{ game.Distributor }}</td>
           <td>{{ game.Genres }}</td>
           <td>{{ game.Platform }}</td>
+        </tr>-->
+        <tr ng-repeat="query in query">
+          <td> <img ng-src="{{ query.image.thumb_url }}" width="50"> </td>
+          <td>{{ query.name }}</td>
+          <td>{{ query.original_release_date | split:' ':0 | date:'MMMM, yyyy'}}</td>
+          <td>{{ query.developer }}</td>
+          <td>{{ query.distributor }}</td>
+          <td>{{ query.genres }}</td>
+          <td>{{ query.platform }}</td>
         </tr>
         </tbody>
       </table>

@@ -145,7 +145,7 @@
           </td>
           <td>
             <a>
-              Platform
+              Platforms
             </a>
           </td>
         </tr>
@@ -167,10 +167,15 @@
           <td>{{ query.developer }}</td>
           <td>{{ query.distributor }}</td>
           <td>{{ query.genres }}</td>
-          <td>{{ query.platform }}</td>
+          <td>
+            <span ng-repeat="platform in query.platforms">
+              {{ platform.abbreviation }}{{$last ? '' : ', '}}
+            </span>
+          </td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+

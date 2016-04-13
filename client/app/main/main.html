@@ -132,8 +132,10 @@
             </a>
           </td>
           <td>
-            <a>
+            <a href="#" ng-click="sortType = 'Lupdated'; sortReverse = !sortReverse">
               Last Updated
+              <span ng-show="sortType == 'Lupdated' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'Lupdated' && sortReverse" class="fa fa-caret-up"></span>
             </a>
           </td>
           <td>

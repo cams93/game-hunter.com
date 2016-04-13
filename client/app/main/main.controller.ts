@@ -4,36 +4,31 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, $resource, $giantbomb) {
+  constructor($http, $scope, socket, $giantbomb) {
     this.$http = $http;
     this.socket = socket;
     this.awesomeThings = [];
 
-    $scope.sortType     = 'Name'; // set the default sort type
-    $scope.sortReverse  = false;  // set the default sort order
-    $scope.searchGame   = '';     // set the default search/filter term
-
+    $scope.sortType     = 'Name';
+    $scope.sortReverse  = false;
+    $scope.searchGame   = '';
 
     $scope.query = [];
-    $scope.genres = [];
+
     var callback = function(result){
       $scope.query = result.results;
       console.log($scope.query);
       return result;
     };
 
-    function getG(result) {
-      $scope.genres = result.results.genres;
-      //console.log($scope.query);
-      return result;
-    }
+    $giantbomb.gameSearch("halo", callback);
 
-    $scope.getGenres = function(gameId){
-      //$giantbomb.gameDetails(gameId,getG);
-      return $scope.genres;
+    $scope.search = function(searchString){
+      $giantbomb.gameSearch(searchString, callback);
+      $scope.sortType     = 'Name';
+      $scope.sortReverse  = false;
+      $scope.searchGame   = '';
     };
-
-    $giantbomb.gameSearch("gears of war",callback);
 
     $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
     $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
@@ -115,6 +110,19 @@ angular.module('gameHunterApp')
       }
       return input.split(splitChar)[splitIndex];
     }
+  })
+  .directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+      element.bind("keydown keypress", function(event) {
+        if(event.which === 13) {
+          scope.$apply(function(){
+            scope.$eval(attrs.ngEnter, {'event': event});
+          });
+
+          event.preventDefault();
+        }
+      });
+    };
   })
   .component('main', {
     templateUrl: 'app/main/main.html',

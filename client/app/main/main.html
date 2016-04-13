@@ -151,10 +151,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="query in query">
+        <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame">
           <td> <img ng-src="{{ query.image.thumb_url }}" width="50"> </td>
           <td>{{ query.name }}</td>
-          <td>{{ query.number_of_user_reviews }}</td>
+          <td>
+            <span ng-if="query.number_of_user_reviews >= 0"> {{ query.number_of_user_reviews }} </span>
+            <span ng-if="query.number_of_user_reviews < 0"> {{ 0 }} </span>
+          </td>
           <td>{{ query.original_release_date | split:' ':0 | date:'MMMM, yyyy'}}</td>
           <td>
             <h5>{{query.date_last_updated  | split:' ':0 | date:"MMMM dd, yyyy "}}</h5>

@@ -118,6 +118,13 @@
             </a>
           </td>
           <td>
+            <a href="#" ng-click="sortType = 'Reviews'; sortReverse = !sortReverse">
+              Reviews
+              <span ng-show="sortType == 'Reviews' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'Reviews' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </td>
+          <td>
             <a href="#" ng-click="sortType = 'Date'; sortReverse = !sortReverse">
               Release Date
               <span ng-show="sortType == 'Date' && !sortReverse" class="fa fa-caret-down"></span>
@@ -147,6 +154,7 @@
         <tr ng-repeat="query in query">
           <td> <img ng-src="{{ query.image.thumb_url }}" width="50"> </td>
           <td>{{ query.name }}</td>
+          <td>{{ query.number_of_user_reviews }}</td>
           <td>{{ query.original_release_date | split:' ':0 | date:'MMMM, yyyy'}}</td>
           <td>
             <h5>{{query.date_last_updated  | split:' ':0 | date:"MMMM dd, yyyy "}}</h5>

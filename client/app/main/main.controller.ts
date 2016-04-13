@@ -93,7 +93,7 @@ angular.module('gameHunterApp')
         $resource('http://www.giantbomb.com/:action',
           {
             action: 'api/games',
-            field_list: 'name,image,id,platforms,original_release_date,date_last_updated',
+            field_list: 'name,image,id,platforms,original_release_date,date_last_updated,number_of_user_reviews',
             filter: 'name:' + searchString,
             api_key: this._apiKey,
             format: 'jsonp',

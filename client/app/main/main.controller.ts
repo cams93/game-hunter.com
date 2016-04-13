@@ -15,10 +15,22 @@ class MainController {
 
 
     $scope.query = [];
+    $scope.genres = [];
     var callback = function(result){
       $scope.query = result.results;
       console.log($scope.query);
       return result;
+    };
+
+    function getG(result) {
+      $scope.genres = result.results.genres;
+      //console.log($scope.query);
+      return result;
+    }
+
+    $scope.getGenres = function(gameId){
+      //$giantbomb.gameDetails(gameId,getG);
+      return $scope.genres;
     };
 
     $giantbomb.gameSearch("gears of war",callback);
@@ -26,49 +38,6 @@ class MainController {
     $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
     $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
     $scope.distributors = ["Electronic Arts", "Ubisoft", "Koch Media", "Nintendo", "Psyonix"];
-
-    /*$scope.games =
-      [{
-        "Image": "assets/images/hardline.jpg",
-        "Name": "Call of Duty: Hardline",
-        "Date": "2015-06-01",
-        "Developer": "Visceral Games",
-        "Distributor": "Electronic Arts",
-        "Genres": "First Person Shooter, Action",
-        "Platform": "PC, Play Station 3, PlayStation 4, Xbox One"
-      }, {
-        "Image": "assets/images/syndicate.jpg",
-        "Name": "Assassin's Creed: Syndicate",
-        "Date": "2015-10-01",
-        "Developer": "Ubisoft",
-        "Distributor": "Ubisoft",
-        "Genres": "Action, Adventure",
-        "Platform": "PC, Play Station 4, Xbox One"
-      }, {
-        "Image": "assets/images/goat.jpg",
-        "Name": "Goat Simulator",
-        "Date": "2014-04-01",
-        "Developer": "Coffee Stain Studios",
-        "Distributor": "Koch Media",
-        "Genres": "Action",
-        "Platform": "PC, Linux, OS X, Xbox One, Xbox 360, Play Station 3, Play Station 4"
-      }, {
-        "Image": "assets/images/smash.jpg",
-        "Name": "Super Smash Bros 4",
-        "Date": "2014-10-01",
-        "Developer": "Sora Ltd, Bandai Namco Games",
-        "Distributor": "Nintendo",
-        "Genres": "Fighting",
-        "Platform": "Nintendo 3DS, Wii U"
-      }, {
-        "Image": "assets/images/rocket.jpg",
-        "Name": "Rocket League",
-        "Date": "2015-07-01",
-        "Developer": "Psyonix",
-        "Distributor": "Psyonix",
-        "Genres": "Sports",
-        "Platform": "PC, OS X, Linux, Play Station 4, Xbox One"
-      }];*/
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
@@ -124,7 +93,7 @@ angular.module('gameHunterApp')
         $resource('http://www.giantbomb.com/:action',
           {
             action: 'api/games',
-            field_list: 'genres,name,image,site_detail_url,id,platforms,original_release_date',
+            field_list: 'name,image,id,platforms,original_release_date,date_last_updated',
             filter: 'name:' + searchString,
             api_key: this._apiKey,
             format: 'jsonp',

@@ -119,28 +119,14 @@
           </td>
           <td>
             <a href="#" ng-click="sortType = 'Date'; sortReverse = !sortReverse">
-              Date
+              Release Date
               <span ng-show="sortType == 'Date' && !sortReverse" class="fa fa-caret-down"></span>
               <span ng-show="sortType == 'Date' && sortReverse" class="fa fa-caret-up"></span>
             </a>
           </td>
           <td>
-            <a href="#" ng-click="sortType = 'Developer'; sortReverse = !sortReverse">
-              Developer
-              <span ng-show="sortType == 'Developer' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'Developer' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </td>
-          <td>
-            <a href="#" ng-click="sortType = 'Distributor'; sortReverse = !sortReverse">
-              Distributor
-              <span ng-show="sortType == 'Distributor' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'Distributor' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </td>
-          <td>
             <a>
-              Genres
+              Last Updated
             </a>
           </td>
           <td>
@@ -148,30 +134,30 @@
               Platforms
             </a>
           </td>
+          <td>
+            <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+              ID
+              <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </td>
         </tr>
         </thead>
         <tbody>
-        <!--<tr ng-repeat="game in games | orderBy:sortType:sortReverse | filter:searchGame">
-          <td> <img ng-src="{{ game.Image }}" width="50"> </td>
-          <td>{{ game.Name }}</td>
-          <td>{{ game.Date | date:'MMMM, yyyy'}}</td>
-          <td>{{ game.Developer }}</td>
-          <td>{{ game.Distributor }}</td>
-          <td>{{ game.Genres }}</td>
-          <td>{{ game.Platform }}</td>
-        </tr>-->
         <tr ng-repeat="query in query">
           <td> <img ng-src="{{ query.image.thumb_url }}" width="50"> </td>
           <td>{{ query.name }}</td>
           <td>{{ query.original_release_date | split:' ':0 | date:'MMMM, yyyy'}}</td>
-          <td>{{ query.developer }}</td>
-          <td>{{ query.distributor }}</td>
-          <td>{{ query.genres }}</td>
+          <td>
+            <h5>{{query.date_last_updated  | split:' ':0 | date:"MMMM dd, yyyy "}}</h5>
+            <h5>{{query.date_last_updated.replace(':', '').replace(':', '')  | split:' ':1 | date: "'At' h:mma" }} </h5>
+          </td>
           <td>
             <span ng-repeat="platform in query.platforms">
               {{ platform.abbreviation }}{{$last ? '' : ', '}}
             </span>
           </td>
+          <td>{{ query.id }}</td>
         </tr>
         </tbody>
       </table>

@@ -18,6 +18,10 @@ class MainController {
 
     var callback = function(result){
       $scope.query = result.results;
+      $scope.console.length = 0;
+      $scope.sortType     = 'name';
+      $scope.sortReverse  = false;
+      $scope.searchGame   = '';
       console.log($scope.query);
       return result;
     };
@@ -26,9 +30,6 @@ class MainController {
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
-      $scope.sortType     = 'name';
-      $scope.sortReverse  = false;
-      $scope.searchGame   = '';
     };
 
     $scope.consoles = function(con){

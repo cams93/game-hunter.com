@@ -72,7 +72,7 @@ angular.module('gameHunterApp')
       },
 
       gameDetails : function(gameId, callback){
-        $resource('http://www.giantbomb.com/:action/:id',
+        $resource('//www.giantbomb.com/:action/:id',
           {
             action: 'api/game',
             id: gameId,
@@ -89,7 +89,7 @@ angular.module('gameHunterApp')
       },
 
       gameSearch : function(searchString, callback){
-        $resource('http://www.giantbomb.com/:action',
+        $resource('//www.giantbomb.com/:action',
           {
             action: 'api/games',
             field_list: 'name,image,id,platforms,original_release_date,date_last_updated,number_of_user_reviews',

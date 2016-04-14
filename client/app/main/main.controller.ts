@@ -125,6 +125,17 @@ angular.module('gameHunterApp')
       });
     };
   })
+  .directive('errSrc', function() {
+    return {
+      link: function(scope, element, attrs) {
+        element.bind('error', function() {
+          if (attrs.src != attrs.errSrc) {
+            attrs.$set('src', attrs.errSrc);
+          }
+        });
+      }
+    }
+  })
   .component('main', {
     templateUrl: 'app/main/main.html',
     controller: MainController

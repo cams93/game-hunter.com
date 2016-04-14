@@ -154,7 +154,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame">
-          <td> <img ng-src="{{ query.image.thumb_url }}" width="50"> </td>
+          <td> <img ng-src="{{ query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
           <td>{{ query.name }}</td>
           <td>
             <span ng-if="query.number_of_user_reviews >= 0"> {{ query.number_of_user_reviews }} </span>

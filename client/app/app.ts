@@ -11,7 +11,8 @@ angular.module('gameHunterApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'validation.match',
-  'ngResource'
+  'ngResource',
+  'ngTable'
 ])
 
 .config(function($routeProvider, $locationProvider) {

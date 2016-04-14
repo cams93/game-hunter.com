@@ -4,7 +4,7 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, $giantbomb) {
+  constructor($http, $scope, socket, $giantbomb, $log) {
     this.$http = $http;
     this.socket = socket;
     this.awesomeThings = [];
@@ -14,6 +14,7 @@ class MainController {
     $scope.searchGame   = '';
 
     $scope.query = [];
+    $scope.console = [];
 
     var callback = function(result){
       $scope.query = result.results;
@@ -21,7 +22,7 @@ class MainController {
       return result;
     };
 
-    $giantbomb.gameSearch("halo", callback);
+    $giantbomb.gameSearch("gears of war", callback);
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
@@ -30,9 +31,11 @@ class MainController {
       $scope.searchGame   = '';
     };
 
-    $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
-    $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
-    $scope.distributors = ["Electronic Arts", "Ubisoft", "Koch Media", "Nintendo", "Psyonix"];
+    $scope.consoles = function(con){
+      if($scope.console.indexOf(con) == -1 ){
+        $scope.console.push(con);
+      }
+    };
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
@@ -107,7 +110,7 @@ angular.module('gameHunterApp')
   .filter('split', function() {
     return function(input, splitChar, splitIndex) {
       if(input == null) {
-        return "Not available";
+        return "TBA";
       }
       return input.split(splitChar)[splitIndex];
     }

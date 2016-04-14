@@ -39,51 +39,17 @@
         <thead>
         <tr>
           <td>
-            <a href="#" data-toggle="collapse" data-target="#genres">
-              Genres
+            <a href="#" data-toggle="collapse" data-target="#platforms">
+              Platforms
             </a>
           </td>
         </tr>
         </thead>
-        <tbody id="genres" class="collapse">
-        <tr ng-repeat="genres in genres">
+        <tbody id="genres" class="collapse in">
+        <tr ng-repeat="console in console.sort()">
           <td>
             <input type="checkbox" value="">
-            {{ genres }}
-          </td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-          <td>
-            <a href="#" data-toggle="collapse" data-target="#developer">
-              Developer
-            </a>
-          </td>
-        </tr>
-        </thead>
-        <tbody id="developer" class="collapse">
-        <tr ng-repeat="developers in developers">
-          <td>
-            <input type="checkbox" value="">
-            {{ developers }}
-          </td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-          <td>
-            <a href="#" data-toggle="collapse" data-target="#distributor">
-              Distributor
-            </a>
-          </td>
-        </tr>
-        </thead>
-        <tbody id="distributor" class="collapse">
-        <tr ng-repeat="distributors in distributors">
-          <td>
-            <input type="checkbox" value="">
-            {{ distributors }}
+            {{ console }}
           </td>
         </tr>
         </tbody>
@@ -167,7 +133,7 @@
           </td>
           <td>
             <span ng-repeat="platform in query.platforms">
-              {{ platform.abbreviation }}{{$last ? '' : ', '}}
+              {{ platform.abbreviation }}{{$last ? '' : ', '}} {{consoles(platform.name)}}
             </span>
           </td>
           <td>{{ query.id }}</td>

@@ -9,7 +9,7 @@ class MainController {
     this.socket = socket;
     this.awesomeThings = [];
 
-    $scope.sortType     = 'Name';
+    $scope.sortType     = 'name';
     $scope.sortReverse  = false;
     $scope.searchGame   = '';
 
@@ -25,7 +25,7 @@ class MainController {
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
-      $scope.sortType     = 'Name';
+      $scope.sortType     = 'name';
       $scope.sortReverse  = false;
       $scope.searchGame   = '';
     };
@@ -90,6 +90,7 @@ angular.module('gameHunterApp')
             action: 'api/games',
             field_list: 'name,image,id,platforms,original_release_date,date_last_updated,number_of_user_reviews',
             filter: 'name:' + searchString,
+            limit: '100',
             api_key: this._apiKey,
             format: 'jsonp',
             json_callback: 'JSON_CALLBACK'

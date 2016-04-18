@@ -34,25 +34,16 @@
   <div class="row">
     <div class="col-md-2 col-md-offset-1">
       <div class="panel panel-default">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <td>
-              <a href="#" data-toggle="collapse" data-target="#platforms">
-                Platforms
-              </a>
-            </td>
-          </tr>
-          </thead>
-          <tbody id="genres" class="collapse in">
-          <tr ng-repeat="console in console.sort()">
-            <td>
-              <input type="checkbox" value="">
-              {{ console }}
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <ul class="list-group">
+          <a href="#" class="list-group-item">
+            <span class="badge"> {{ query.length }}</span>
+            All Platforms
+          </a>
+          <a class="list-group-item" ng-repeat="console in console.sort()" href="#">
+            <span class="badge"> {{ consoleFrec[console]}}</span>
+            {{ console }}
+          </a>
+        </ul>
       </div>
     </div>
 

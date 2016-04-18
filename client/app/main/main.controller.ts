@@ -15,6 +15,7 @@ class MainController {
 
     $scope.query = [];
     $scope.console = [];
+    $scope.consoleFrec = {};
 
     var callback = function(result){
       $scope.query = result.results;
@@ -22,6 +23,8 @@ class MainController {
       $scope.sortType     = 'name';
       $scope.sortReverse  = false;
       $scope.searchGame   = '';
+      $scope.consoleFrec = {};
+      $scope.getConsoles();
       console.log($scope.query);
       return result;
     };
@@ -35,6 +38,20 @@ class MainController {
     $scope.consoles = function(con){
       if($scope.console.indexOf(con) == -1 ){
         $scope.console.push(con);
+      }
+    };
+    
+    $scope.getConsoles = function (){
+      for(var j = 0; j <$scope.query.length; j++) {
+        var platforms = $scope.query[j].platforms;
+        for (var i = 0; i < platforms.length; i++) {
+          if ($scope.consoleFrec[platforms[i].name] == null) {
+            $scope.consoleFrec[platforms[i].name] = 1;
+          }
+          else {
+            $scope.consoleFrec[platforms[i].name]++;
+          }
+        }
       }
     };
 

@@ -37,11 +37,11 @@
         <ul class="list-group">
           <a href="#" class="list-group-item">
             <span class="badge"> {{ query.length }}</span>
-            All Platforms
+            <div ng-click="doStuff('all'); $scope.$diggest()"> All Platforms </div>
           </a>
           <a class="list-group-item" ng-repeat="console in console.sort()" href="#">
             <span class="badge"> {{ consoleFrec[console]}}</span>
-            {{ console }}
+            <div ng-click="doStuff(console)">{{ console }}</div>
           </a>
         </ul>
       </div>
@@ -109,7 +109,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame">
+          <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame | filter: filters.c: 'all'">
             <td> <img ng-src="{{ 'http://static.giantbomb.com/' + query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
             <td>{{ query.name }}</td>
             <td>

@@ -17,6 +17,15 @@ class MainController {
     $scope.console = [];
     $scope.consoleFrec = {};
     $scope.filters = {c: 'all'};
+    $scope.selected = 'All Platforms';
+
+    $scope.select= function(item) {
+      $scope.selected = item;
+    };
+
+    $scope.isActive = function(item) {
+      return $scope.selected === item;
+    };
 
     var callback = function(result){
       $scope.query = result.results;
@@ -26,6 +35,7 @@ class MainController {
       $scope.searchGame   = '';
       $scope.consoleFrec = {};
       $scope.filters.c = 'all';
+      $scope.selected = 'All Platforms';
       $scope.getConsoles();
       console.log($scope.query);
       console.log($scope.filters.c);
@@ -114,7 +124,7 @@ angular.module('gameHunterApp')
             action: 'api/games',
             field_list: 'name,image,id,platforms,original_release_date,date_last_updated,number_of_user_reviews',
             filter: 'name:' + searchString,
-            limit: '100',
+            limit: '99',
             api_key: this._apiKey,
             format: 'jsonp',
             json_callback: 'JSON_CALLBACK'

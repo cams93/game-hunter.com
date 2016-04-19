@@ -36,11 +36,11 @@
     <div class="col-md-2 col-md-offset-1">
       <div class="panel panel-default">
         <ul class="list-group">
-          <a href="#" class="list-group-item" ng-click="filters.c ='all'">
+          <a href="#" class="list-group-item" ng-class="{active: isActive('All Platforms')}" ng-click="filters.c ='all'; select('All Platforms')">
             <span class="badge"> {{ query.length }}</span>
             All Platforms
           </a>
-          <a class="list-group-item" ng-repeat="console in console.sort()" href="#" ng-click="filters.c = console">
+          <a href="#" class="list-group-item" ng-repeat="console in console.sort()" ng-class="{active: isActive(console)}" href="#" ng-click="filters.c = console; select(console)">
             <span class="badge"> {{consoleFrec[console]}}</span>
             {{ console }}
           </a>

@@ -18,10 +18,6 @@ class MainController {
     $scope.consoleFrec = {};
     $scope.filters = {c: 'all'};
 
-    $scope.doStuff = function(console){
-      $scope.filters.c = console;
-    };
-
     var callback = function(result){
       $scope.query = result.results;
       $scope.console.length = 0;

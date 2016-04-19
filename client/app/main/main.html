@@ -35,13 +35,13 @@
     <div class="col-md-2 col-md-offset-1">
       <div class="panel panel-default">
         <ul class="list-group">
-          <a href="#" class="list-group-item">
+          <a href="#" class="list-group-item" ng-click="filters.c ='all'">
             <span class="badge"> {{ query.length }}</span>
-            <div ng-click="doStuff('all'); $scope.$diggest()"> All Platforms </div>
+            All Platforms
           </a>
-          <a class="list-group-item" ng-repeat="console in console.sort()" href="#">
-            <span class="badge"> {{ consoleFrec[console]}}</span>
-            <div ng-click="filters.c = console">{{ console }}</div>
+          <a class="list-group-item" ng-repeat="console in console.sort()" href="#" ng-click="filters.c = console">
+            <span class="badge"> {{consoleFrec[console]}}</span>
+            {{ console }}
           </a>
         </ul>
       </div>

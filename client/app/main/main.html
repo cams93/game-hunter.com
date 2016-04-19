@@ -41,7 +41,7 @@
           </a>
           <a class="list-group-item" ng-repeat="console in console.sort()" href="#">
             <span class="badge"> {{ consoleFrec[console]}}</span>
-            <div ng-click="doStuff(console)">{{ console }}</div>
+            <div ng-click="filters.c = console">{{ console }}</div>
           </a>
         </ul>
       </div>
@@ -118,8 +118,8 @@
             </td>
             <td>{{ query.original_release_date | split:' ':0 | date:'MMMM, yyyy'}}</td>
             <td>
-              <h5>{{query.date_last_updated  | split:' ':0 | date:"MMMM dd, yyyy "}}</h5>
-              <h5>{{query.date_last_updated.replace(':', '').replace(':', '')  | split:' ':1 | date: "'At' h:mma" }} </h5>
+              {{query.date_last_updated  | split:' ':0 | date:"MMMM dd, yyyy "}}<br></br>
+              {{query.date_last_updated.replace(':', '').replace(':', '')  | split:' ':1 | date: "'At' h:mma" }}
             </td>
             <td>
               <span ng-repeat="platform in query.platforms">

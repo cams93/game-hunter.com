@@ -4,61 +4,67 @@
 
 class MainController {
 
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $giantbomb, $log) {
     this.$http = $http;
     this.socket = socket;
     this.awesomeThings = [];
 
-    $scope.sortType     = 'Name'; // set the default sort type
-    $scope.sortReverse  = false;  // set the default sort order
-    $scope.searchGame   = '';     // set the default search/filter term
+    $scope.sortType     = 'name';
+    $scope.sortReverse  = false;
+    $scope.searchGame   = '';
 
-    $scope.genres = ["Action", "Shooter", "Action-adventure", "Adventure", "Role-playing", "Simulation", "Sports", "Strategy", "Survival horror", "Massively multiplayer online"];
-    $scope.developers = ["Visceral Games", "Ubisoft", "Coffee Stain Studios", "Sora Ltd, Bandai Namco Games", "Psyonix"];
-    $scope.distributors = ["Electronic Arts", "Ubisoft", "Koch Media", "Nintendo", "Psyonix"];
+    $scope.query = [];
+    $scope.console = [];
+    $scope.consoleFrec = {};
+    $scope.filters = {c: 'all'};
+    $scope.selected = 'All Platforms';
 
-    $scope.games =
-      [{
-        "Image": "assets/images/hardline.jpg",
-        "Name": "Call of Duty: Hardline",
-        "Date": "2015-06-01",
-        "Developer": "Visceral Games",
-        "Distributor": "Electronic Arts",
-        "Genres": "First Person Shooter, Action",
-        "Platform": "PC, Play Station 3, PlayStation 4, Xbox One"
-      }, {
-        "Image": "assets/images/syndicate.jpg",
-        "Name": "Assassin's Creed: Syndicate",
-        "Date": "2015-10-01",
-        "Developer": "Ubisoft",
-        "Distributor": "Ubisoft",
-        "Genres": "Action, Adventure",
-        "Platform": "PC, Play Station 4, Xbox One"
-      }, {
-        "Image": "assets/images/goat.jpg",
-        "Name": "Goat Simulator",
-        "Date": "2014-04-01",
-        "Developer": "Coffee Stain Studios",
-        "Distributor": "Koch Media",
-        "Genres": "Action",
-        "Platform": "PC, Linux, OS X, Xbox One, Xbox 360, Play Station 3, Play Station 4"
-      }, {
-        "Image": "assets/images/smash.jpg",
-        "Name": "Super Smash Bros 4",
-        "Date": "2014-10-01",
-        "Developer": "Sora Ltd, Bandai Namco Games",
-        "Distributor": "Nintendo",
-        "Genres": "Fighting",
-        "Platform": "Nintendo 3DS, Wii U"
-      }, {
-        "Image": "assets/images/rocket.jpg",
-        "Name": "Rocket League",
-        "Date": "2015-07-01",
-        "Developer": "Psyonix",
-        "Distributor": "Psyonix",
-        "Genres": "Sports",
-        "Platform": "PC, OS X, Linux, Play Station 4, Xbox One"
-      }];
+    $scope.select= function(item) {
+      $scope.selected = item;
+    };
+
+    $scope.isActive = function(item) {
+      return $scope.selected === item;
+    };
+
+    var callback = function(result){
+      $scope.query = result.results;
+      $scope.console.length = 0;
+      $scope.sortType     = 'name';
+      $scope.sortReverse  = false;
+      $scope.searchGame   = '';
+      $scope.consoleFrec = {};
+      $scope.filters.c = 'all';
+      $scope.selected = 'All Platforms';
+      $scope.getConsoles();
+      return result;
+    };
+
+    $giantbomb.gameSearch("gears of war", callback);
+
+    $scope.search = function(searchString){
+      $giantbomb.gameSearch(searchString, callback);
+    };
+
+    $scope.consoles = function(con){
+      if($scope.console.indexOf(con) == -1 ){
+        $scope.console.push(con);
+      }
+    };
+
+    $scope.getConsoles = function (){
+      for(var j = 0; j <$scope.query.length; j++) {
+        var platforms = $scope.query[j].platforms;
+        for (var i = 0; i < platforms.length; i++) {
+          if ($scope.consoleFrec[platforms[i].name] == null) {
+            $scope.consoleFrec[platforms[i].name] = 1;
+          }
+          else {
+            $scope.consoleFrec[platforms[i].name]++;
+          }
+        }
+      }
+    };
 
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
@@ -83,9 +89,89 @@ class MainController {
 }
 
 angular.module('gameHunterApp')
+  .constant('_api','c73ada009a6a9bd847ff325e3344c3dde52ed181')
+  .factory('$giantbomb', ['$resource','_api', function($resource, _api) {
+    var GiantBomb = {
+      _apiKey : _api,
+      setAPIKey : function(apiKey){
+        this._apiKey = apiKey;
+      },
+
+      gameDetails : function(gameId, callback){
+        $resource('//www.giantbomb.com/:action/:id',
+          {
+            action: 'api/game',
+            id: gameId,
+            field_list: 'name,description,id,original_release_date,platforms,api_detail_url,site_detail_url',
+            api_key: this._apiKey,
+            format: 'jsonp',
+            json_callback: 'JSON_CALLBACK'
+          },
+          {
+            get: {method: 'JSONP'}
+          }).get({}, function(result){
+          callback(result);
+        });
+      },
+
+      gameSearch : function(searchString, callback){
+        $resource('//www.giantbomb.com/:action',
+          {
+            action: 'api/games',
+            field_list: 'name,image,id,platforms,original_release_date,date_last_updated,number_of_user_reviews',
+            filter: 'name:' + searchString,
+            limit: '99',
+            api_key: this._apiKey,
+            format: 'jsonp',
+            json_callback: 'JSON_CALLBACK'
+          },
+          {
+            get: {method: 'JSONP'}
+          }).get({}, function(result){
+          callback(result);
+        });
+      }
+    };
+    return GiantBomb;
+  }])
+  .filter('split', function() {
+    return function(input, splitChar, splitIndex) {
+      if(input == null) {
+        return "TBA";
+      }
+      return input.split(splitChar)[splitIndex];
+    }
+  })
+  .directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+      element.bind("keydown keypress", function(event) {
+        if(event.which === 13) {
+          scope.$apply(function(){
+            scope.$eval(attrs.ngEnter, {'event': event});
+          });
+
+          event.preventDefault();
+        }
+      });
+    };
+  })
+  .directive('errSrc', function() {
+    return {
+      link: function(scope, element, attrs) {
+        element.bind('error', function() {
+          if (attrs.src != attrs.errSrc) {
+            attrs.$set('src', attrs.errSrc);
+          }
+        });
+      }
+    }
+  })
   .component('main', {
     templateUrl: 'app/main/main.html',
     controller: MainController
   });
 
 })();
+
+
+

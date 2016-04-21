@@ -37,8 +37,6 @@ class MainController {
       $scope.filters.c = 'all';
       $scope.selected = 'All Platforms';
       $scope.getConsoles();
-      console.log($scope.query);
-      console.log($scope.filters.c);
       return result;
     };
 
@@ -91,13 +89,11 @@ class MainController {
 }
 
 angular.module('gameHunterApp')
-  .factory('$giantbomb', ['$resource', function($resource) {
+  .constant('_api','c73ada009a6a9bd847ff325e3344c3dde52ed181')
+  .factory('$giantbomb', ['$resource','_api', function($resource, _api) {
     var GiantBomb = {
-
-      _apiKey : 'c73ada009a6a9bd847ff325e3344c3dde52ed181',
-
+      _apiKey : _api,
       setAPIKey : function(apiKey){
-        console.log("Setting Api Key", apiKey);
         this._apiKey = apiKey;
       },
 

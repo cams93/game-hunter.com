@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<div style="padding-left: 5%; padding-right: 5%;" ng-app='app'>
+      <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
+        <form>
+          <fieldset>
+            <legend>
+              Your comment
+            </legend>
+            <div>
+                <textarea ng-model='text'></textarea>
+            </div>
+            <div>
+              <input class='button' ng-click='postComment()' ng-model ='text' type='submit' value='Submit'>
+            </div>
+          </fieldset>
+        </form>
+        <h3>
+          {{comments.length}} Comments
+        </h3>
+        <ul>
+          <li ng-repeat='comment in comments'>
+            <div class='comment'>
+              <div>
+                {{comment.commentData}}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+</body>
+</html>

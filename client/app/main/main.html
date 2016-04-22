@@ -57,7 +57,6 @@
           </div>
         </div>
       </form>
-
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -111,7 +110,8 @@
           </thead>
           <tbody>
           <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame | filter: filters.c:strict">
-            <td> <img ng-src="{{ 'http://static.giantbomb.com/' + query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
+            <!-- 'http://static.giantbomb.com/' + -->
+            <td> <img ng-src="{{ query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
             <td>{{ query.name }}</td>
             <td>
               <span ng-if="query.number_of_user_reviews >= 0"> {{ query.number_of_user_reviews }} </span>
@@ -130,6 +130,9 @@
             </td>
             <td><a href="/comments/">{{ query.id }}</a></td>
           </tr>
+          <div ng-if="!progressBar">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+          </div>
           </tbody>
         </table>
       </div>

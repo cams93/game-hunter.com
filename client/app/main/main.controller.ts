@@ -4,7 +4,7 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, $giantbomb, $log) {
+  constructor($http, $scope, socket, $giantbomb) {
     this.$http = $http;
     this.socket = socket;
     this.awesomeThings = [];
@@ -12,6 +12,7 @@ class MainController {
     $scope.sortType     = 'name';
     $scope.sortReverse  = false;
     $scope.searchGame   = '';
+    $scope.progressBar = false;
 
     $scope.query = [];
     $scope.console = [];
@@ -37,6 +38,7 @@ class MainController {
       $scope.filters.c = 'all';
       $scope.selected = 'All Platforms';
       $scope.getConsoles();
+      $scope.progressBar = true;
       return result;
     };
 
@@ -44,6 +46,7 @@ class MainController {
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
+      $scope.progressBar = false;
     };
 
     $scope.consoles = function(con){
@@ -58,9 +61,11 @@ class MainController {
         for (var i = 0; i < platforms.length; i++) {
           if ($scope.consoleFrec[platforms[i].name] == null) {
             $scope.consoleFrec[platforms[i].name] = 1;
+            $scope.progressBar = true;
           }
           else {
             $scope.consoleFrec[platforms[i].name]++;
+            $scope.progressBar = true;
           }
         }
       }

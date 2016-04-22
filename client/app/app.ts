@@ -12,6 +12,8 @@ angular.module('gameHunterApp', [
   'ui.bootstrap',
   'validation.match',
   'ngResource',
+  'ngMaterial',
+  'ngMessages'
 ])
 
 .config(function($routeProvider, $locationProvider) {

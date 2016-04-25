@@ -54,7 +54,24 @@ class MainController {
         $scope.console.push(con);
       }
     };
-
+    $scope.formatName = function(name){
+      var count = 0;
+      var str="";
+      for(var i = 0; i < name.length; i++) {
+        str=str+name.charAt(i);
+        count++;
+        if (count >= 18) {
+          i++;
+          while(name.charAt(i)!= ' ' && i < name.length){
+            str=str+name.charAt(i);
+            i++;
+          }
+          str=str+" <br /> ";
+          count=0;
+        }
+      }
+        return str;
+    };
     $scope.getConsoles = function (){
       for(var j = 0; j <$scope.query.length; j++) {
         var platforms = $scope.query[j].platforms;

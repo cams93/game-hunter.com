@@ -32,8 +32,8 @@
 </div>-->
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 col-md-offset-1">
+  <div class="row-fluid">
+    <div class="col-md-3" style="padding-left: 30px; padding-right: 30px;">
       <div class="panel panel-default">
         <ul class="list-group">
           <a href="#" class="list-group-item" ng-class="{active: isActive('All Platforms')}" ng-click="filters.c ='all'; select('All Platforms')">
@@ -111,8 +111,8 @@
           <tbody>
           <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame | filter: filters.c:strict">
             <!-- 'http://static.giantbomb.com/' + -->
-            <td> <img ng-src="{{ query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
-            <td>{{ query.name }}</td>
+            <td> <img ng-src="{{ 'http://static.giantbomb.com/' + query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
+            <td><span ng-bind-html="formatName(query.name)"></span></td>
             <td>
               <span ng-if="query.number_of_user_reviews >= 0"> {{ query.number_of_user_reviews }} </span>
               <span ng-if="query.number_of_user_reviews < 0">  {{ 0 }} </span>

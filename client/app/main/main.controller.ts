@@ -135,7 +135,6 @@ angular.module('gameHunterApp')
           callback(result);
         });
       },
-
       gameSearch : function(searchString, callback){
         $resource('//www.giantbomb.com/:action',
           {

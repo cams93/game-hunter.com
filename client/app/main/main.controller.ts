@@ -38,7 +38,6 @@ class MainController {
       $scope.filters.c = 'all';
       $scope.selected = 'All Platforms';
       $scope.getConsoles();
-      $scope.progressBar = true;
       return result;
     };
 
@@ -50,8 +49,9 @@ class MainController {
     };
 
     $scope.consoles = function(con){
-      if($scope.console.indexOf(con) == -1 ){
+      if($scope.console.indexOf(con) == -1){
         $scope.console.push(con);
+        $scope.progressBar = true;
       }
     };
     $scope.formatName = function(name){
@@ -75,14 +75,14 @@ class MainController {
     $scope.getConsoles = function (){
       for(var j = 0; j <$scope.query.length; j++) {
         var platforms = $scope.query[j].platforms;
-        for (var i = 0; i < platforms.length; i++) {
-          if ($scope.consoleFrec[platforms[i].name] == null) {
-            $scope.consoleFrec[platforms[i].name] = 1;
-            $scope.progressBar = true;
-          }
-          else {
-            $scope.consoleFrec[platforms[i].name]++;
-            $scope.progressBar = true;
+        if(platforms != null){
+          for (var i = 0; i < platforms.length; i++) {
+            if ($scope.consoleFrec[platforms[i].name] == null) {
+              $scope.consoleFrec[platforms[i].name] = 1
+            }
+            else {
+              $scope.consoleFrec[platforms[i].name]++;
+            }
           }
         }
       }

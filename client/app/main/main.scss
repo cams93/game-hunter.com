@@ -34,23 +34,3 @@
   padding-left: 30px;
   padding-right: 30px;
 }
-
-figure[data-align="right"] {
-  margin-left: 40px !important;
-  float: right !important;
-}
-
-figure[data-align="left"] {
-  margin-right: 40px !important;
-  float: left !important;
-}
-
-figcaption{
-  clear: both;
-  display: block;
-  font-family: Georgia,serif;
-  font-style: oblique;
-  margin: 10px 0;
-  text-align: center;
-  text-shadow: rgba(255,255,255,0.5) 0 1px 0;
-}

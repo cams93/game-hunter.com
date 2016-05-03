@@ -1,17 +1,92 @@
-<html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css"/>
+
 </head>
 <body>
-<div style="padding-left: 5%; padding-right: 5%;" ng-app='app'>
-      <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
+  <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
+    <div class="jumbotron jumbotron-fluid" style="padding-top: 20px; padding-bottom: 20px;">
+      <div class="container" align="justify" ng-model="query">
+        <!-- 'http://static.giantbomb.com/' + -->
+        <img style="float:left; padding-right: 20px;" ng-src="{{ query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
+        <h1 class="display-3">{{query.name}}</h1>
+        <p>{{query.deck}}</p>
+      </div>
+    </div>
+
+    <div class="container" style=" padding-left: 0px; padding-right: 0px;">
+      <div class="col-lg-9 col-md-9" align="justify">
+        <span ng-bind-html="description"></span>
+      </div>
+      <noscript></noscript>
+      <div class="col-lg-3 col-md-3">
+        <xc-base>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Name</b></p>
+            <p class="list-group-item-heading">{{query.name}}</p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>First release date</b></p>
+            <p class="list-group-item-heading">{{ query.original_release_date | split:' ':0 | date:'longDate'}}</p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Platform</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="platform in query.platforms">
+                {{ platform.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Developer</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="developer in query.developers">
+                {{ developer.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Publisher</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="publisher in query.publishers">
+                {{ publisher.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Genre</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="genre in query.genres">
+                {{ genre.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Theme</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="theme in query.themes">
+                {{ theme.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Franchises</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="franchise in query.franchises">
+                {{ franchise.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Aliases</b></p>
+            <p class="list-group-item-heading">{{query.aliases}}</p>
+          </div>
+        </xc-base>
         <form>
           <fieldset>
             <legend>
               Your comment
             </legend>
             <div>
-                <textarea ng-model='text'></textarea>
+              <textarea ng-model='text'></textarea>
             </div>
             <div>
               <input class='button' ng-click='postComment()' ng-model ='text' type='submit' value='Submit'>
@@ -32,5 +107,6 @@
         </ul>
       </div>
     </div>
+  </div>
 </body>
-</html>
+

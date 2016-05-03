@@ -41,7 +41,7 @@ class MainController {
       return result;
     };
 
-    $giantbomb.gameSearch("gears of war", callback);
+    $giantbomb.gameSearch($giantbomb.searchst, callback);
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
@@ -115,10 +115,13 @@ angular.module('gameHunterApp')
   .factory('$giantbomb', ['$resource','_api', function($resource, _api) {
     var GiantBomb = {
       _apiKey : _api,
+      searchst : 'gears of war',
+      setST : function(name){
+        this.searchst = name;
+      },
       setAPIKey : function(apiKey){
         this._apiKey = apiKey;
       },
-
       gameDetails : function(gameId, callback){
         $resource('//www.giantbomb.com/:action/:id',
           {
@@ -136,6 +139,7 @@ angular.module('gameHunterApp')
         });
       },
       gameSearch : function(searchString, callback){
+        this.searchst  = searchString;
         $resource('//www.giantbomb.com/:action',
           {
             action: 'api/games',

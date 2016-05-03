@@ -135,7 +135,7 @@
                 <br ng-if="($index+1)%4==0">
               </span>
             </td>
-            <td><a href="/comments/">{{ query.id }}</a></td>
+            <td><a ng-href="/{{ query.id }}/">{{ query.id }}</a></td>
           </tr>
           <div ng-if="!progressBar">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>

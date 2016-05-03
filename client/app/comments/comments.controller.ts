@@ -22,12 +22,11 @@ angular.module('gameHunterApp')
       return input.split(splitChar)[splitIndex];
     }
   })
-  .controller('CommentsCtrl', function ($scope, $http, $giantbomb) {
+  .controller('CommentsCtrl', function ($scope, $http, $giantbomb, $routeParams) {
     $scope.text = "";
     $scope.comments = [];
     $scope.query = [];
     $scope.description = "";
-
     var callback = function(result){
       $scope.query = result.results;
       console.log(result.results);
@@ -36,7 +35,7 @@ angular.module('gameHunterApp')
       return result;
     };
 
-    $giantbomb.gameDetails("30615", callback);
+    $giantbomb.gameDetails($routeParams.comments, callback);
 
     $scope.formatDescription = function(description){
       return description;

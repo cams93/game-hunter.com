@@ -6,7 +6,7 @@
     <div class="jumbotron jumbotron-fluid" style="padding-top: 20px; padding-bottom: 20px;">
       <div class="container" align="justify" ng-model="query">
         <!-- 'http://static.giantbomb.com/' + -->
-        <img style="float:left; padding-right: 20px;" ng-src="{{ query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
+        <img style="float:left; padding-right: 20px;" ng-src="{{ 'http://static.giantbomb.com/' + query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
         <h1 class="display-3">{{query.name}}</h1>
         <p>{{query.deck}}</p>
       </div>

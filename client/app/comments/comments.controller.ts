@@ -32,6 +32,7 @@ angular.module('gameHunterApp')
       $scope.query = result.results;
       console.log(result.results);
       $scope.description = $scope.query.description.replace(/<a href="[\/]/g,'<a href="http://www.giantbomb.com/');
+      $scope.description = $scope.description.replace(/<img src="[\/]/g,'<img src="http://static.giantbomb.com/');
       return result;
     };
 

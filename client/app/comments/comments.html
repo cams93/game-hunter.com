@@ -24,8 +24,8 @@
               <div class="row">
                 <!-- 'http://static.giantbomb.com/' + -->
                 <div class="col-lg-4 col-sm-6 col-xs-12" ng-repeat="image in query.images">
-                  <a href="{{image.thumb_url}}">
-                  <img ng-src="{{ image.medium_url }}" err-src="assets/images/notfound.png" class="thumbnail img-responsive">
+                  <a href="{{ 'http://static.giantbomb.com/' + image.thumb_url }}">
+                  <img ng-src="{{ 'http://static.giantbomb.com/' + image.medium_url }}" err-src="assets/images/notfound.png" class="thumbnail img-responsive">
                     </a>
                 </div>
               </div>

@@ -3,6 +3,7 @@
 </head>
 <body>
   <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
+
     <div class="jumbotron jumbotron-fluid" style="padding-top: 20px; padding-bottom: 20px;">
       <div class="container" ng-model="query">
         <!-- 'http://static.giantbomb.com/' + -->
@@ -30,36 +31,39 @@
                 </div>
               </div>
             </uib-tab>
-
             <uib-tab index="2" heading="Comments">
-              <form>
-                <h2>Your comment</h2>
-                <fieldset>
-                  <div>
-                    <textarea ng-model='text'></textarea>
-                  </div>
-                  <div>
-                    <input class='button' ng-click='postComment()' ng-model ='text' type='submit' value='Submit'>
-                  </div>
-                </fieldset>
-              </form>
+              <h2>Write a review of the game</h2>
+              <input type="text" name="MyComment" class="form-control" placeholder="Enter a comment..." ng-model="text" style="margin-bottom: 5px;">
+              <p class="help-block" ng-show="noLogged">
+                You need to be logged in order to make a post
+              </p>
+              <p class="help-block" ng-show="empty">
+                A comment is required
+              </p>
+              <button class="btn btn-primary" ng-model="text" ng-click="postComment(text); text = null">Submit</button>
               <h3>
-                {{comments.length}} Comments
+                {{comments.length}} Comment(s)
               </h3>
-              <ul>
-                <li ng-repeat='comment in comments'>
-                  <div class='comment'>
-                    <div>
-                      {{comment.commentData}}
+              <ul class="media-list comments" ng-repeat='comment in comments'>
+                <div class="comment">
+                  <li class="media" >
+                    <a class="pull-left" href="#">
+                      <img class="media-object img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
+                    </a>
+                    <div class="media-body">
+                      <h5 class="media-heading pull-left">{{comment.userName}}</h5>
+                      <div class="comment-info pull-left">
+                        <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted on {{comment.date | date:'dd-MM-yyyy'}} at {{comment.date | date:'h:mm:ss a'}}</div>
+                      </div>
+                      <br class="clearfix">
+                      <p class="well">{{comment.commentData}}</p>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                </div>
               </ul>
-
             </uib-tab>
           </uib-tabset>
         </form>
-
       </div>
       <noscript></noscript>
       <div class="col-lg-3 col-md-3">

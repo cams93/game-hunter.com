@@ -130,7 +130,8 @@ angular.module('gameHunterApp')
           {
             action: 'api/game',
             id: gameId,
-            field_list: 'name,deck,developers,publishers,genres,themes,franchises,aliases,image,description,id,original_release_date,platforms,api_detail_url,site_detail_url',
+            field_list: 'name,deck,images,developers,publishers,genres,themes,franchises,aliases,image,description,id,' +
+            'original_release_date,platforms,api_detail_url,site_detail_url',
             api_key: this._apiKey,
             format: 'jsonp',
             json_callback: 'JSON_CALLBACK'

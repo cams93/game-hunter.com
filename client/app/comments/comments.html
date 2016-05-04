@@ -20,10 +20,18 @@
                   <span ng-bind-html="description"></span>
             </uib-tab>
             <uib-tab index="1" heading="Images">
-              Some Images
+              <br>
+              <div class="row">
+                <!-- 'http://static.giantbomb.com/' + -->
+                <div class="col-lg-4 col-sm-6 col-xs-12" ng-repeat="image in query.images">
+                  <a href="{{image.thumb_url}}">
+                  <img ng-src="{{ image.medium_url }}" err-src="assets/images/notfound.png" class="thumbnail img-responsive">
+                    </a>
+                </div>
+              </div>
             </uib-tab>
-            <uib-tab index="2" heading="Comments">
 
+            <uib-tab index="2" heading="Comments">
               <form>
                 <h2>Your comment</h2>
                 <fieldset>

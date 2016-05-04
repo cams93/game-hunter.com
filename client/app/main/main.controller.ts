@@ -29,6 +29,9 @@ class MainController {
     };
 
     var callback = function(result){
+      if(result.number_of_total_results < 1){
+        $scope.progressBar = true;
+      }
       $scope.query = result.results;
       $scope.console.length = 0;
       $scope.sortType     = 'name';

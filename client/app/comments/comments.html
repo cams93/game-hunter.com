@@ -1,0 +1,133 @@
+<body>
+  <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
+
+    <div class="jumbotron jumbotron-fluid" id="gray-rectangle">
+      <div class="container" ng-model="query">
+        <!-- 'http://static.giantbomb.com/' + -->
+        <img id="cover-style" ng-src="{{ 'http://static.giantbomb.com/' + query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
+        <h1 class="display-3">{{query.name}}</h1>
+        <p align="justify">{{query.deck}}</p>
+      </div>
+    </div>
+
+    <div class="container" id="no-padding">
+      <div class="col-lg-9 col-md-9" align="justify">
+        <form name="outerForm" class="tab-form-demo">
+          <uib-tabset active="activeForm">
+            <uib-tab index="0" heading="Game Wiki">
+                  <span ng-bind-html="description"></span>
+            </uib-tab>
+            <uib-tab index="1" heading="Images">
+              <br>
+              <div class="row">
+                <!-- 'http://static.giantbomb.com/' + -->
+                <div class="col-lg-4 col-sm-6 col-xs-12" ng-repeat="image in query.images">
+                  <a href="{{ 'http://static.giantbomb.com/' + image.thumb_url }}">
+                  <img ng-src="{{ 'http://static.giantbomb.com/' + image.medium_url }}" err-src="assets/images/notfound.png" class="thumbnail img-responsive">
+                    </a>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Comments">
+              <h2>Write a review of the game</h2>
+              <input type="text" name="MyComment" class="form-control" placeholder="Enter a comment..." ng-model="text" id="comment-style">
+              <p class="help-block" ng-show="noLogged">
+                You need to be logged in order to make a post
+              </p>
+              <p class="help-block" ng-show="empty">
+                A comment is required
+              </p>
+              <button class="btn btn-primary" ng-model="text" ng-click="postComment(text); text = null">Submit</button>
+              <h3>
+                {{comments.length}} Comment(s)
+              </h3>
+              <ul class="media-list comments" ng-repeat='comment in comments'>
+                <div class="comment">
+                  <li class="media" >
+                    <a class="pull-left" href="#">
+                      <img class="media-object img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
+                    </a>
+                    <div class="media-body">
+                      <h5 class="media-heading pull-left">{{comment.userName}}</h5>
+                      <div class="comment-info pull-left">
+                        <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted on {{comment.date | date:'dd-MM-yyyy'}} at {{comment.date | date:'h:mm:ss a'}}</div>
+                      </div>
+                      <br class="clearfix">
+                      <p class="well">{{comment.commentData}}</p>
+                    </div>
+                  </li>
+                </div>
+              </ul>
+            </uib-tab>
+          </uib-tabset>
+        </form>
+      </div>
+      <noscript></noscript>
+      <div class="col-lg-3 col-md-3">
+        <xc-base>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Name</b></p>
+            <p class="list-group-item-heading">{{query.name}}</p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>First release date</b></p>
+            <p class="list-group-item-heading">{{ query.original_release_date | split:' ':0 | date:'longDate'}}</p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Platform</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="platform in query.platforms">
+                {{ platform.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Developer</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="developer in query.developers">
+                {{ developer.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Publisher</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="publisher in query.publishers">
+                {{ publisher.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Genre</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="genre in query.genres">
+                {{ genre.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Theme</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="theme in query.themes">
+                {{ theme.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Franchises</b></p>
+            <p class="list-group-item-heading">
+              <span ng-repeat="franchise in query.franchises">
+                {{ franchise.name }}{{$last ? '' : ', '}}
+              </span>
+            </p>
+          </div>
+          <div class="list-group-item">
+            <p class="list-group-item-text"><b>Aliases</b></p>
+            <p class="list-group-item-heading">{{query.aliases}}</p>
+          </div>
+        </xc-base>
+      </div>
+    </div>
+  </div>
+</body>
+

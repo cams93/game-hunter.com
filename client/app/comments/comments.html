@@ -1,16 +1,16 @@
 <body>
   <div class='comments' ng-controller='CommentsCtrl' ng-init='getComment()'>
 
-    <div class="jumbotron jumbotron-fluid" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="jumbotron jumbotron-fluid" id="gray-rectangle">
       <div class="container" ng-model="query">
         <!-- 'http://static.giantbomb.com/' + -->
-        <img style="float:left; padding-right: 20px;" ng-src="{{ 'http://static.giantbomb.com/' + query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
+        <img id="cover-style" ng-src="{{ 'http://static.giantbomb.com/' + query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
         <h1 class="display-3">{{query.name}}</h1>
         <p align="justify">{{query.deck}}</p>
       </div>
     </div>
 
-    <div class="container" style=" padding-left: 0px; padding-right: 0px;">
+    <div class="container" id="no-padding">
       <div class="col-lg-9 col-md-9" align="justify">
         <form name="outerForm" class="tab-form-demo">
           <uib-tabset active="activeForm">
@@ -30,7 +30,7 @@
             </uib-tab>
             <uib-tab index="2" heading="Comments">
               <h2>Write a review of the game</h2>
-              <input type="text" name="MyComment" class="form-control" placeholder="Enter a comment..." ng-model="text" style="margin-bottom: 5px;">
+              <input type="text" name="MyComment" class="form-control" placeholder="Enter a comment..." ng-model="text" id="comment-style">
               <p class="help-block" ng-show="noLogged">
                 You need to be logged in order to make a post
               </p>

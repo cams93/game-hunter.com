@@ -1,39 +1,6 @@
-<head>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-
-<!--<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Hola!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in main.awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="main.deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="main.newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="main.addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
-</div>-->
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 col-md-offset-1">
+<div class="container-fluid" id="container-margin">
+  <div class="row-fluid">
+    <div class="col-lg-2 col-md-3">
       <div class="panel panel-default">
         <ul class="list-group">
           <a href="#" class="list-group-item" ng-class="{active: isActive('All Platforms')}" ng-click="filters.c ='all'; select('All Platforms')">
@@ -48,16 +15,15 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-lg-9 col-md-8">
       <form>
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input type="text" class="form-control" placeholder="Search game" ng-model="searchGame.name" ng-enter="search(searchGame.name)">
+            <input type="text" class="form-control" placeholder="Search game and press enter" ng-model="searchGame.name" ng-enter="search(searchGame.name)">
           </div>
         </div>
       </form>
-
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -111,8 +77,9 @@
           </thead>
           <tbody>
           <tr ng-repeat="query in query | orderBy:sortType:sortReverse | filter:searchGame | filter: filters.c:strict">
+            <!-- 'http://static.giantbomb.com/' + -->
             <td> <img ng-src="{{ 'http://static.giantbomb.com/' + query.image.thumb_url }}" width="50" err-src="assets/images/notfound.png"> </td>
-            <td>{{ query.name }}</td>
+            <td><span ng-bind-html="formatName(query.name)"></span></td>
             <td>
               <span ng-if="query.number_of_user_reviews >= 0"> {{ query.number_of_user_reviews }} </span>
               <span ng-if="query.number_of_user_reviews < 0">  {{ 0 }} </span>
@@ -128,8 +95,11 @@
                 <br ng-if="($index+1)%4==0">
               </span>
             </td>
-            <td><a href="/comments/">{{ query.id }}</a></td>
+            <td><a ng-href="/{{ query.id }}/">{{ query.id }}</a></td>
           </tr>
+          <div ng-if="!progressBar">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+          </div>
           </tbody>
         </table>
       </div>

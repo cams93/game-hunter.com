@@ -4,15 +4,14 @@
 
 class MainController {
 
-  constructor($http, $scope, socket, $giantbomb, $log) {
+  constructor($http, $scope, socket, $giantbomb) {
     this.$http = $http;
     this.socket = socket;
-    this.awesomeThings = [];
 
     $scope.sortType     = 'name';
     $scope.sortReverse  = false;
     $scope.searchGame   = '';
-
+    $scope.progressBar = false;
     $scope.query = [];
     $scope.console = [];
     $scope.consoleFrec = {};
@@ -28,6 +27,9 @@ class MainController {
     };
 
     var callback = function(result){
+      if(result.number_of_total_results < 1){
+        $scope.progressBar = true;
+      }
       $scope.query = result.results;
       $scope.console.length = 0;
       $scope.sortType     = 'name';
@@ -40,51 +42,52 @@ class MainController {
       return result;
     };
 
-    $giantbomb.gameSearch("gears of war", callback);
+    $giantbomb.gameSearch($giantbomb.searchst, callback);
 
     $scope.search = function(searchString){
       $giantbomb.gameSearch(searchString, callback);
+      $scope.progressBar = false;
     };
 
     $scope.consoles = function(con){
-      if($scope.console.indexOf(con) == -1 ){
+      if($scope.console.indexOf(con) == -1){
         $scope.console.push(con);
+        $scope.progressBar = true;
       }
     };
-
+    $scope.formatName = function(name){
+      var count = 0;
+      var str="";
+      for(var i = 0; i < name.length; i++) {
+        str=str+name.charAt(i);
+        count++;
+        if (count >= 18) {
+          i++;
+          while(name.charAt(i)!= ' ' && i < name.length){
+            str=str+name.charAt(i);
+            i++;
+          }
+          str=str+" <br /> ";
+          count=0;
+        }
+      }
+        return str;
+    };
     $scope.getConsoles = function (){
       for(var j = 0; j <$scope.query.length; j++) {
         var platforms = $scope.query[j].platforms;
-        for (var i = 0; i < platforms.length; i++) {
-          if ($scope.consoleFrec[platforms[i].name] == null) {
-            $scope.consoleFrec[platforms[i].name] = 1;
-          }
-          else {
-            $scope.consoleFrec[platforms[i].name]++;
+        if(platforms != null){
+          for (var i = 0; i < platforms.length; i++) {
+            if ($scope.consoleFrec[platforms[i].name] == null) {
+              $scope.consoleFrec[platforms[i].name] = 1
+            }
+            else {
+              $scope.consoleFrec[platforms[i].name]++;
+            }
           }
         }
       }
     };
-
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-      socket.syncUpdates('thing', this.awesomeThings);
-    });
-
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
-    });
-  }
-
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
-  }
-
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
   }
 }
 
@@ -93,16 +96,20 @@ angular.module('gameHunterApp')
   .factory('$giantbomb', ['$resource','_api', function($resource, _api) {
     var GiantBomb = {
       _apiKey : _api,
+      searchst : 'gears of war',
+      setST : function(name){
+        this.searchst = name;
+      },
       setAPIKey : function(apiKey){
         this._apiKey = apiKey;
       },
-
       gameDetails : function(gameId, callback){
         $resource('//www.giantbomb.com/:action/:id',
           {
             action: 'api/game',
             id: gameId,
-            field_list: 'name,description,id,original_release_date,platforms,api_detail_url,site_detail_url',
+            field_list: 'name,deck,images,developers,publishers,genres,themes,franchises,aliases,image,description,id,' +
+            'original_release_date,platforms,api_detail_url,site_detail_url',
             api_key: this._apiKey,
             format: 'jsonp',
             json_callback: 'JSON_CALLBACK'
@@ -113,8 +120,8 @@ angular.module('gameHunterApp')
           callback(result);
         });
       },
-
       gameSearch : function(searchString, callback){
+        this.searchst  = searchString;
         $resource('//www.giantbomb.com/:action',
           {
             action: 'api/games',

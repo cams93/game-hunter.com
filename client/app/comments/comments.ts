@@ -3,7 +3,7 @@
 angular.module('gameHunterApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/comments', {
+      .when('/:comments', {
         template: '<comments></comments>'
       });
   });

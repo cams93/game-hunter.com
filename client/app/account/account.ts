@@ -13,9 +13,7 @@ angular.module('gameHunterApp')
         referrer: '/',
         template: '',
         controller: function($location, $route, Auth) {
-          var referrer = $route.current.params.referrer ||
-                          $route.current.referrer ||
-                          '/';
+          var referrer = '/';
           Auth.logout();
           $location.path(referrer);
         }

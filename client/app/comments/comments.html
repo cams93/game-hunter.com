@@ -4,7 +4,7 @@
     <div class="jumbotron jumbotron-fluid" id="gray-rectangle">
       <div class="container" ng-model="query">
         <!-- 'http://static.giantbomb.com/' + -->
-        <img id="cover-style" ng-src="{{ 'http://static.giantbomb.com/' + query.image.medium_url }}" height="260" err-src="assets/images/notfound.png">
+        <img id="cover-style" ng-src="{{imageText(query.image.medium_url)}}" height="260" err-src="assets/images/notfound.png">
         <h1 class="display-3">{{query.name}}</h1>
         <p align="justify">{{query.deck}}</p>
       </div>

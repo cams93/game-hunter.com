@@ -59,6 +59,11 @@ angular.module('gameHunterApp')
         });
     };
 
+    $scope.imageText = function(img){
+      img = img.replace('https://www.giantbomb.com/','http://static.giantbomb.com/');
+      return img;
+    };
+
     $scope.postComment = function(text){
       if($cookies.get('token')){
         $scope.noLogged = false;

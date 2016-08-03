@@ -55,6 +55,12 @@ class MainController {
         $scope.progressBar = true;
       }
     };
+
+    $scope.imageText = function(img){
+      img = img.replace('https://www.giantbomb.com/','http://static.giantbomb.com/');
+      return img;
+    };
+
     $scope.formatName = function(name){
       var count = 0;
       var str="";
